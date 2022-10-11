@@ -6,7 +6,7 @@ function setup(){
     ellipse(50,50,i);
   }
   for(let i = 60; i<=100; i=i+10){
-    stroke(255,0,0);
+    stroke(255,1,0);
     ellipse(50,50,i);
   }
 }
