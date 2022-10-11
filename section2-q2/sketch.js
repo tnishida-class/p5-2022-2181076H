@@ -31,7 +31,7 @@ for(let i = 0; i < 8; i++){
       if((i+j)%2==0){
       }
       else{
-        fill(0);
+        fill(10);
         ellipse(10+i*20,10+j*20,18,18)
       }
     }
