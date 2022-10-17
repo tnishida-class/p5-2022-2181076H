@@ -1,21 +1,28 @@
-// ギリシャ国旗
+// 国旗
 function setup() {
-  const blue = color(0, 51, 160);
-  createCanvas(270, 180);
-  // noStroke();
+  const yellow = color(255, 204, 0);
+  const red = color(255, 0, 0);
+  createCanvas(400, 400);
   background(255);
+  stroke(255,0,0);
+  strokeWeight(2);
+  const cx = width / 2; 
+  const cy = height / 2;
+  const maxR = min(width, height); 
+  drawArcs(yellow,red,maxR,maxR,0.8*Math.PI)
+  drawCircle(yellow, maxR*0.1 );
 
-  let d = height / 9; // 縞1本の太さ
+}
+function drawCircle(c, r){
+  fill(c);
+  ellipse(200,200, r, r);
+}
 
-  for(let i = 0; i < 9; i++){
-    // BLANK[1] (hint: 縞の色を交互に変えるには2で割った余りを使おう)
-    rect(0, i * d, width, (i + 1) * d);
+function drawArcs(yellow, red, r,r,PI) {
+  for (let i = 0; i < 16; i++) {
+    let start = TWO_PI / 16 * i;
+    let stop = TWO_PI / 16 * (i + 1);
+    fill(i % 2 == 0 ? yellow : red);
+    arc(200, 200, r, r, start, stop, PIE);
   }
-
-  fill(blue);
-  let size = d * 5;
-  rect(0, 0, size, size);
-
-  fill(255);
-  // BLANK[2] (hint: 白い十字を描くには rect を二つ描こう)
 }
