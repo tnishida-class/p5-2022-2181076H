@@ -22,7 +22,7 @@ function draw(){
       x -= 10;} 
   
   
-  if(keyIsDown("H".charCodeAt(0))){ 
+  if(keyIsDown(" ".charCodeAt(0))){ 
     y-=5; }
     else if(y<height/2){
       y += 10; 
