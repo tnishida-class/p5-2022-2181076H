@@ -8,7 +8,7 @@ function windowResized(){
 }
 
 function draw(){
-  background(160, 192, 255);
+  background(160, 255, 192);
   for(let i = 0; i < 10; i++){
     ellipse(width * i / 10, height * (10 - i) / 10, 20);
   }
