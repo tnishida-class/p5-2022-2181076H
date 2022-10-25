@@ -11,10 +11,6 @@ function draw(){
     ellipse(b.x, b.y,b.size);
     b.x += b.vx;
     b.y += b.vy; 
-    
-
-    
-  
   }
 }
 
