@@ -19,14 +19,6 @@ function balloon(t){
   text(t, 2, 1.5*h);
   pop();
   beginShape();
-  //Fill(255);
-  //for (i=1;i<=3;i++){
-    //r=30;
-    //const theta = TWO_PI * i * 2 / 5 - HALF_PI;
-  //let x = w*i+r*cos(theta) ;
-  //let y = h*i+r*sin(theta) ;
-  //vertex(x,y);
-//}
   vertex((w+p*20)/2,h+p*20);
   vertex(w+p*20,2*(h+p*20));
   vertex(3*(w+p*20)/4,h+p*20);
