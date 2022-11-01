@@ -1,7 +1,7 @@
 // テキスト「関数を作る(2) 結果を戻す関数」～「総仕上げ：カレンダーを描画しよう」
 function setup(){
   createCanvas(200, 200);
-  //calendar(2019, 10);
+  calendar(2019, 10);
 
   // isLeapYear の動作確認のため console に出力しています
   //for(let i = 2000; i <= 2100; i++){
@@ -24,6 +24,7 @@ function calendar(y, m){
   let dow = dayOfWeek(y, m, 1);
   for(let d = 1; d <= daysInMonth(y, m); d++){
     // BLANK[3] (hint: まずは daysInYear, dayOfWeek を作ろう)
+    
   }
 }
 
