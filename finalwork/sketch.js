@@ -1,10 +1,10 @@
-let x, y, vx, vy,X,Y,t,s,dt,ds,r;
+let x, y, vx, vy,X,Y,t,s,dt,ds,r,ww,wh;
 const vyMax = 30;
 
 function setup(){
   createCanvas(windowWidth, windowHeight);
   x = windowWidth / 2;
-  y = windowHeight / 3;
+  y = windowHeight / 3+100;
   vx=0;
   vy=0;
   dt=0;
@@ -13,67 +13,41 @@ function setup(){
 
 function draw(){
   //赤いボール
-  background(100, 255, 100);
+  background(150, 230, 150);
   push();
   fill(255,0,0);
   ellipse(x, y, 50);
   x+=vx;
   y+=vy;
   pop();
-  /*if(keyIsDown("V".charCodeAt(0))){ 
-    x -= 5;}
-    else if(x<width/2){
-      x += 10;} 
-  if(keyIsDown("N".charCodeAt(0))){ 
-    x += 5;}
-    else if(x>width/2){
-      x -= 10;} 
-  if(keyIsDown("B".charCodeAt(0))){ 
-    y-=5; }
-    else if(y<height/2){
-      y += 10; }
-  if(keyIsDown(" ".charCodeAt(0))){ 
-    y+=5; }
-    else if(y>height/2){
-      y -= 10; }*/
 
   if(y>windowHeight+100){//下に行き過ぎると戻る
     x = windowWidth / 2;
-    y = windowHeight / 3;
+    y = windowHeight / 3+100;
     vx = 0;
     vy = 0;
   }
   //赤いボールここまで
-  
-  //バット
-      
-  //rect(X, Y, 200, 30);
-  X=windowWidth/2-130;
-  Y=windowHeight-250;
-  arc(X,Y,400,400,t,s);
-  t=5*PI/12;
-  s=PI/2;
-  t+=dt;
-  s+=ds;
-
 
   push();
   line(windowWidth/2-70,Y+100,0,0);
   line(windowWidth/2+70,Y+100,windowWidth,0);
   pop();
 
-  rect(windowWidth/5,windowHeight/10,windowWidth/20,20);
+  ww=windowWidth;
+  wh=windowHeight;
   
+  textSize(ww/50);
+  text("1~7→ボールを投げる\np→元に戻す\nw→バットを引く",ww/50,5*wh/7);
 
-  /*if(dist(x,y,X+300*cos(t),Y+300*sin(t))<=50){
-    vy=-5;
-    if(y<0){//上に行き過ぎると戻る
-      x = width / 2;
-      y = height / 3;
-      vx = 0;
-      vy = 0;
-    }
-  }*/
+  rect(ww/5,wh/10,ww/20,20);//レフト
+  rect(ww/2-ww/40,wh/10-20,ww/20,20);//センター
+  rect(4*ww/5,wh/10,ww/20,20);//ライト
+  rect(ww/5,wh/3+70,ww/20,20);//サード
+  rect(ww/3,wh/3-50,ww/20,20);//ショート
+  rect(2*ww/3-60,wh/3-50,ww/20,20);//セカンド
+  rect(4*ww/5-ww/20,wh/3+70,ww/20,20);//ファースト
+  
 
   if(y<-100){//上に行き過ぎると戻る
     x = width / 2;
@@ -82,42 +56,99 @@ function draw(){
     vy = 0;
   }
 
-  if(t>-21*PI/16){
+  X=windowWidth/2-130;
+  Y=windowHeight-250;
+  arc(X,Y,400,400,t,s);
+  t=-3*PI/4;
+  s=-3*PI/4+PI/12;
+  t+=dt;
+  s+=ds;
 
   if(keyIsDown("W".charCodeAt(0))){ 
+    dt += PI/30;
+    ds += PI/30;
+    if(t>PI/2){
+      t=PI/2;
+      s=PI/2+PI/12;
+      t+=0;
+      s+=0;
+      dt -= PI/30;
+      ds -= PI/30;
+    }
+  }
+  else{
+    if(t>PI/2){
+      t=PI/2;
+      s=PI/2+PI/12;
+      dt -= PI/30;
+      ds -= PI/30;
+    }else{
     dt -= PI/30;
     ds -= PI/30;
-  }else{
-    dt += PI/10;
-    ds += PI/10;
-    if(s>PI/2){
-      t=5*PI/12;
-      s=PI/2;
+  }
+    if(t<-3*PI/4){
+      t=-3*PI/4;
+      s=-3*PI/4+PI/12;
       dt=0;
       ds=0;
     }
   }
-}else{
-  t+=0;
-  s+=0;
-}
-//逆にする（初めスイング後でｗ押して引いて、離すと戻る）
-
-
   //x,yはボールの座標
 
   //バットにボールが当たったとき
   if(min_d2(x,y,X,Y,X+300*cos(t),Y+300*sin(t))<30){
     vx=r*sin(t);
     vy=-r*cos(t);
-    r=random(3,15)
+    r=random(3,8);
   }
-
-  if(min_d2(x,y,windowWidth/5,windowHeight/10,windowWidth/5+windowWidth/20,windowHeight/10)<30){
+  //アウト判定
+  if(min_d2(x,y,ww/5,wh/10,ww/4,wh/10)<40){
     vx=0;
     vy=0;
-    textSize(100);
-    text("out",windowWidth/2,windowHeight/2);
+    textSize(ww/30);
+    text("レフトフライ",ww/2,wh/2);
+  }
+  if(min_d2(x,y,ww/2-ww/40,wh/10-20,21*ww/40,wh/10-20)<40){
+    vx=0;
+    vy=0;
+    textSize(ww/30);
+    text("センターフライ",ww/2,wh/2);
+  }
+  if(min_d2(x,y,4*ww/5,wh/10,17*ww/20,wh/10)<40){
+    vx=0;
+    vy=0;
+    textSize(ww/30);
+    text("ライトフライ",ww/2,wh/2);
+  }
+  if(min_d2(x,y,ww/5,wh/3+70,ww/10,wh/3+70)<40){
+    vx=0;
+    vy=0;
+    textSize(ww/30);
+    text("サードゴロ",ww/2,wh/2);
+  }
+  if(min_d2(x,y,ww/3,wh/3-50,ww/3+ww/20,wh/3-50)<40){
+    vx=0;
+    vy=0;
+    textSize(ww/30);
+    text("ショートゴロ",ww/2,wh/2);
+  }
+  if(min_d2(x,y,2*ww/3-60,wh/3-50,2*ww/3+ww/20,wh/3-50)<40){
+    vx=0;
+    vy=0;
+    textSize(ww/30);
+    text("セカンドゴロ",ww/2,wh/2);
+  }
+  if(min_d2(x,y,4*ww/5-ww/20,wh/3+70,4*ww/5-ww/20+ww/20,wh/3+70)<40){
+    vx=0;
+    vy=0;
+    textSize(ww/30);
+    text("ファーストゴロ",ww/2,wh/2);
+  }
+  if(min_d2(x,y,0,0,ww,0)<30){
+    vx=0;
+    vy=0;
+    textSize(ww/30);
+    text("オオタニサーン！",ww/4,wh/2);
   }
 
   const dx = random(4);
@@ -141,9 +172,6 @@ function draw(){
       break;      
     }
   }
-
-
-
 }
 const g = 1;     
 const jump = 20; 
@@ -153,10 +181,7 @@ const size = 20;
 function windowResized(){
   resizeCanvas(windowWidth, windowHeight);
 }
-
 let balls = [];
-
-
 function keyTyped() {
   if (key === '1') {
     vy=2;
@@ -180,22 +205,22 @@ function keyTyped() {
     vy=random(7,25);
   }
   if(key==="s"){
-    dt-=PI/70;
-    ds-=PI/70;
+    dt+=PI/70;
+    ds+=PI/70;
   }
 }
 
 function keyPressed(){
   if(key === "p"){ // Pを押したらリセット
     x = windowWidth / 2;
-    y = windowHeight / 3;
+    y = windowHeight / 3+100;
     vx = 0;
     vy = 0;
     grabbed = false;  
   } 
   if (key === 'q') {
-    t=5*PI/12;
-    s=PI/2;
+    t=-5*PI/12;
+    s=-PI/2;
     dt=0;
     ds=0;
   }
