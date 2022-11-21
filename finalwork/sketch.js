@@ -83,8 +83,8 @@ function draw(){
       dt -= PI/30;
       ds -= PI/30;
     }else{
-    dt -= PI/30;
-    ds -= PI/30;
+    dt -= PI/70;
+    ds -= PI/70;
   }
     if(t<-3*PI/4){
       t=-3*PI/4;
