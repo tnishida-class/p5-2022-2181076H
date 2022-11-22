@@ -153,25 +153,7 @@ function draw(){
 
   const dx = random(4);
   const dy = random(4);
-  /*if(mag(dx, dy) > 5){ 
-    const b = { x:random(windowWidth), y: random(2*windowHeight/5), size: random(20,60), vx: dx*random(-2,2), vy: dy*random(-2,2) };
-    balls.push(b);
-  }*/
-  if(mag(dx, dy) > 5){ 
-    const b = { x:random(windowWidth), y: random(windowHeight/5), size: random(20,60), vx: dx*random(-2,2), vy: 5 };
-    balls.push(b);
-  }
-  for(let i = 0; i < balls.length; i++){
-    let b = balls[i];
-    ellipse(b.x, b.y,b.size);
-    b.x += b.vx;
-    b.y += b.vy; 
 
-    if(dist(x,y,b.x,b.y)<25){
-      text("a",100,100);
-      break;      
-    }
-  }
 }
 const g = 1;     
 const jump = 20; 
