@@ -163,7 +163,6 @@ const size = 20;
 function windowResized(){
   resizeCanvas(windowWidth, windowHeight);
 }
-let balls = [];
 function keyTyped() {
   if (key === '1') {
     vy=2;
