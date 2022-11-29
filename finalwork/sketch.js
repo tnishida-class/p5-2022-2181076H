@@ -46,6 +46,8 @@ function draw(){
   rect(ww/5,wh/3+70,ww/20,20);//サード
   rect(ww/3,wh/3-50,ww/20,20);//ショート
   rect(2*ww/3-60,wh/3-50,ww/20,20);//セカンド
+  textSize(20);
+  text("菊池",2*ww/3-50,wh/3-30);
   rect(4*ww/5-ww/20,wh/3+70,ww/20,20);//ファースト
   
 
